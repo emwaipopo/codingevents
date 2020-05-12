@@ -6,10 +6,11 @@
 </head>
 <body>
 <h1>All Events</h1>
-    <ul>
-        <th:block th:each="event : ${events}">
-            <li th:text="${event}"></li>
-        </th:block>
-    </ul>
+<p th:unless="${events} and ${events.size()}">No events!</p>
+<ul>
+    <th:block th:each="event : ${events}">
+        <li th:text="${event}"></li>
+    </th:block>
+</ul>
 </body>
 </html>
