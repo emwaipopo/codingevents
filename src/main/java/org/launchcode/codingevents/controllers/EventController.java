@@ -4,8 +4,10 @@ import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +25,17 @@ public class EventController {
     @GetMapping("create")
     public String displayCreateEventForm(Model model){
         model.addAttribute("tittle", "Create Event");
+        model.addAttribute("event", new Event());
         return"events/create";
     }
 
     @PostMapping("create")
-    public String processCreateEventForm(@RequestParam String eventName, String eventDescription) {
-        EventData.add(new Event(eventName, eventDescription));
+    public String processCreateEventForm(@ModelAttribute @Valid Event newEvent, Errors errors, Model model) {
+        if(errors.hasErrors()) {
+            model.addAttribute("title", "Create Event");
+            return "events/create";
+        }
+        EventData.add(newEvent);
         return "redirect:";
     }
 
