@@ -17,19 +17,25 @@ public class Event {
     @Size(max = 500, message = "Description too long!")
     private String description;
 
+    @NotBlank(message = "Venue is required.")
+    @Size(max = 30, message = "Venue must be up to 30 characters long")
+    private String venue;
+
     @NotBlank(message = "Email is required.")
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
-    public Event(String name, String description, String contactEmail) {
+    public Event(String name, String description, String contactEmail, String venue) {
+        this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
-        this.id = nextId;
-        nextId++;
+        this.venue = venue;
     }
 
     public Event() {
+        this.id = nextId;
+        nextId++;
     }
 
     public String getName() {
@@ -54,6 +60,14 @@ public class Event {
 
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
+    }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
     }
 
     public int getId() {

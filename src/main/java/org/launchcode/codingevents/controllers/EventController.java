@@ -30,8 +30,11 @@ public class EventController {
     }
 
     @PostMapping("create")
+//    @RequestMapping(value="create",method = { RequestMethod.GET, RequestMethod.POST })
     public String processCreateEventForm(@ModelAttribute @Valid Event newEvent, Errors errors, Model model) {
+
         if(errors.hasErrors()) {
+//            model.addAttribute("event", new Event());
             model.addAttribute("title", "Create Event");
             return "events/create";
         }
