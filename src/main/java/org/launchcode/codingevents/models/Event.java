@@ -1,12 +1,17 @@
 package org.launchcode.codingevents.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.*;
 import java.util.Objects;
 
+@Entity
 public class Event {
 
+    @Id
+    @GeneratedValue
     private int id;
-    private static int nextId = 1;
 
     @AssertTrue(message="Registration must be required")
     private boolean registrationRequired;
@@ -31,21 +36,20 @@ public class Event {
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
-    public Event(String name, String description, String contactEmail, String venue, boolean registrationRequired, int attendees) {
-        this();
+    private EventType type;
+
+    public Event(String name, String description, String contactEmail, String venue, boolean registrationRequired, int attendees, EventType type) {
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
         this.venue = venue;
         this.registrationRequired = registrationRequired;
         this.attendees = attendees;
+        this.type = type;
 
     }
 
-    public Event() {
-        this.id = nextId;
-        nextId++;
-    }
+    public Event() { }
 
     public String getName() {
         return name;
@@ -97,6 +101,14 @@ public class Event {
 
     public int getId() {
         return id;
+    }
+
+    public EventType getType() {
+        return type;
+    }
+
+    public void setType(EventType type) {
+        this.type = type;
     }
 
     @Override
