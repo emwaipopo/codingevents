@@ -4,13 +4,13 @@
 <body class="container">
 <header th:replace="fragments :: header"></header>
 <form method="post">
-    <th:block th:each="event : ${events}">
-       <div class="form-group">
-       <label>
-           <span th:text="${event.name}"></span>
-           <input type="checkbox" name="eventIds" th:value="${event.id}" class="form-control">
-       </label>
-       </div>
+    <th:block th:each="eventCategory : ${EventCategories}">
+        <div class="form-group">
+            <label>
+                <span th:text="${eventCategory.name}"></span>
+                <input type="checkbox" name="eventCategoryIds" th:value="${eventCategory.id}" class="form-control">
+            </label>
+        </div>
     </th:block>
     <div class="form-group">
         <input type="submit" value="Delete" class="btn btn-danger">

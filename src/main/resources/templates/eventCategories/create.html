@@ -3,7 +3,7 @@
     <head th:replace="fragments :: head"></head>
     <body class="container">
         <header th:replace="fragments :: header"></header>
-        <form method="post" th:object="${category}">
+        <form method="post" th:object="${eventCategory}">
             <div class="form-group">
                 <label>Category Name
                     <input th:field="*{name}" class="form-control">
